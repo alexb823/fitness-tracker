@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { Analytics } from './Analytics'
-import { ListWorkouts } from './ListWorkouts'
+import { ListWorkouts } from './DisconnectedListWorkouts'
 
 import './Main.css'
 export const Main = (props) => {
@@ -10,7 +10,7 @@ export const Main = (props) => {
   return (
     <div id="main">
       <Analytics />
-      <ListWorkouts workouts={ workouts } />
+      <ListWorkouts workouts={workouts} />
     </div>
   )
 }
