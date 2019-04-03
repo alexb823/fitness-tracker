@@ -1,9 +1,9 @@
 import React, { Fragment } from 'react';
-import { deleteExerciseThunk, buildFetchWorkoutsThunk } from '../store/index';
+import { deleteExerciseThunk, buildFetchWorkoutsThunk, updateExerciseThunk } from '../store/index';
 import { connect } from 'react-redux';
 
 const SingleExercise = props => {
-  const { deleteExercise, fetchWorkouts } = props;
+  const { deleteExercise, fetchWorkouts, updateExercise } = props;
   const { id, name, duration, completed, description } = props.exercise
   return (
     <Fragment>
@@ -17,6 +17,7 @@ const SingleExercise = props => {
                 ? 'toggle-complete fas fa-check-circle'
                 : 'toggle-complete far fa-circle'
             }
+            onClick={() => { updateExercise(id).then(() => fetchWorkouts()) }}
           />
           <i className="fas fa-trash" onClick={() => { deleteExercise(id).then(() => fetchWorkouts()) }} />
         </div>
@@ -31,7 +32,8 @@ const SingleExercise = props => {
 const mapDispatchToProps = (dispatch) => {
   return {
     deleteExercise: (id) => dispatch(deleteExerciseThunk(id)),
-    fetchWorkouts: () => dispatch(buildFetchWorkoutsThunk())
+    fetchWorkouts: () => dispatch(buildFetchWorkoutsThunk()),
+    updateExercise: (id) => dispatch(updateExerciseThunk(id))
 
   }
 }

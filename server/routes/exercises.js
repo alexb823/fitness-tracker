@@ -45,4 +45,11 @@ router.delete('/:id', async (req, res, next) => {
   }
 })
 
+router.put('/:id', (req, res, next) => {
+  Exercise.findByPk(req.params.id)
+    .then(exercise => exercise.update({ completed: !exercise.completed }))
+    .then(exercise => res.send(exercise))
+    .catch(err => next(err))
+})
+
 module.exports = router

@@ -8,6 +8,14 @@ const initialState = { workouts: [] };
 
 const SET_WORKOUTS = 'SET_WORKOUTS';
 const DELETE_EXERCISE = 'DELETE_EXERCISE';
+const UPDATE_EXERCISE = 'UPDATE_EXERCISE';
+
+const updateExerciseActionCreator = (id) => {
+  return {
+    type: UPDATE_EXERCISE,
+    id
+  }
+}
 
 export const setWorkoutsActionCreator = workouts => {
   return {
@@ -29,10 +37,20 @@ const reducer = (state = initialState, action) => {
       return { ...state, workouts: action.workouts };
     case DELETE_EXERCISE:
       return state;
+    case UPDATE_EXERCISE:
+      return state;
     default:
       return state;
   }
 };
+
+export const updateExerciseThunk = (id) => {
+  return dispatch => {
+    return axios.put(`/api/exercises/${id}`)
+      .then(() => dispatch(updateExerciseActionCreator(id)))
+      .catch(er => console.log('oops!', er))
+  }
+}
 
 export const buildFetchWorkoutsThunk = () => {
   return dispatch => {
