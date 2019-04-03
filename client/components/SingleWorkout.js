@@ -1,5 +1,5 @@
 import React from 'react'
-import { SingleExercise } from './SingleExercise'
+import SingleExercise from './SingleExercise'
 
 import './SingleWorkout.css'
 export const SingleWorkout = props => {

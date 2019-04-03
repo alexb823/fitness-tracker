@@ -7,7 +7,7 @@ import axios from 'axios';
 const initialState = { workouts: [] };
 
 const SET_WORKOUTS = 'SET_WORKOUTS';
-const DELETE_WORKOUT = 'DELETE_WORKOUT';
+const DELETE_EXERCISE = 'DELETE_EXERCISE';
 
 export const setWorkoutsActionCreator = workouts => {
   return {
@@ -16,9 +16,9 @@ export const setWorkoutsActionCreator = workouts => {
   };
 };
 
-export const deletedWorkOut = id => {
+export const deleteExercise = (id) => {
   return {
-    type: DELETE_WORKOUT,
+    type: DELETE_EXERCISE,
     id,
   };
 };
@@ -27,8 +27,8 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_WORKOUTS:
       return { ...state, workouts: action.workouts };
-      case DELETE_WORKOUT:
-      return {...state, workouts: state.workouts.filter(workout => workout.id !== action.id)}
+    case DELETE_EXERCISE:
+      return state;
     default:
       return state;
   }
@@ -43,12 +43,12 @@ export const buildFetchWorkoutsThunk = () => {
   };
 };
 
-export const deleteWorkoutThunk = (id) => {
-    return dispatch => {
-        axios.delete(`/api/workouts/${id}`)
-        .then(() => dispatch(deletedWorkOut(id)))
-        .catch(err => console.log('Nooooooo!', err))
-    }
+export const deleteExerciseThunk = (id) => {
+  return dispatch => {
+    return axios.delete(`/api/exercises/${id}`)
+      .then(() => dispatch(deleteExercise(id)))
+      .catch(err => console.log('Nooooooo!', err))
+  }
 }
 
 const store = createStore(
