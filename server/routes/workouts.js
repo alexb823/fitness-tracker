@@ -5,7 +5,7 @@ const router = express.Router()
 // GET all workouts
 router.get('/', async (req, res, next) => {
   try {
-    res.json(await Workout.findAll( { include: Exercise}))
+    res.json(await Workout.findAll( { include: Exercise, order: [['name', 'DESC']]}))
   } catch (err) {
     next(err)
   }
